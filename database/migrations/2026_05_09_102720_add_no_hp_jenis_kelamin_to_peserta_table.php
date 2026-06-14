@@ -12,8 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('peserta', function (Blueprint $table) {
-            $table->string('no_hp')->nullable()->after('tanggal_lahir');
-            $table->enum('jenis_kelamin', ['Laki-laki', 'Perempuan'])->nullable()->after('no_hp');
+            if (!Schema::hasColumn('peserta', 'no_hp')) {
+                $table->string('no_hp')->nullable()->after('tanggal_lahir');
+            }
+            if (!Schema::hasColumn('peserta', 'jenis_kelamin')) {
+                $table->enum('jenis_kelamin', ['Laki-laki', 'Perempuan'])->nullable()->after('no_hp');
+            }
         });
     }
 

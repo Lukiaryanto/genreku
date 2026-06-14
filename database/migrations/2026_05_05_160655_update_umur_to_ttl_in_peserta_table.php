@@ -12,8 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('peserta', function (Blueprint $table) {
-            $table->dropColumn('umur');
-            $table->date('tanggal_lahir')->nullable();
+            if (Schema::hasColumn('peserta', 'umur')) {
+                $table->dropColumn('umur');
+            }
+        });
+
+        Schema::table('peserta', function (Blueprint $table) {
+            if (!Schema::hasColumn('peserta', 'tanggal_lahir')) {
+                $table->date('tanggal_lahir')->nullable();
+            }
         });
     }
 
