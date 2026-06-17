@@ -15,7 +15,7 @@
 
             <div class="text-center mb-8">
                 <h2 class="text-3xl font-extrabold text-white tracking-tight">
-                    Buat Akun
+                    Daftar
                 </h2>
                 <p class="text-gray-300 text-sm mt-2">Daftarkan diri Anda untuk bergabung</p>
             </div>
@@ -49,7 +49,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
                             </svg>
                         </div>
-                        <input type="email" name="email" value="{{ old('email') }}" required placeholder="admin@example.com"
+                        <input type="email" name="email" value="{{ old('email') }}" required placeholder="nama@gmail.com"
                             class="block w-full rounded-xl bg-white/5 border border-white/10 pl-10 px-4 py-3 text-white placeholder-gray-400 focus:border-indigo-400 focus:ring focus:ring-indigo-400/20 focus:bg-white/10 transition-all duration-300">
                     </div>
                     @error('email')

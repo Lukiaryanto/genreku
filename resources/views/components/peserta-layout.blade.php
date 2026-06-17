@@ -22,7 +22,7 @@
         <x-peserta-sidebar :active="$active" />
 
         <main class="pt-16"> {{-- reserve space for fixed header (h-16) --}}
-            <div class="pl-64 w-full"> {{-- add left padding for fixed sidebar (w-64) --}}
+            <div class="lg:pl-64 w-full"> {{-- sidebar only shifts on desktop --}}
                 @if (session('success'))
                     <div class="p-6 pb-0">
                         <div class="bg-emerald-50 border border-emerald-400 text-emerald-800 px-4 py-3 rounded-lg shadow flex items-center justify-between" role="alert">
@@ -49,6 +49,68 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@tailwindplus/elements@1" type="module"></script>
+
+    {{-- Mobile Sidebar Toggle Script --}}
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const toggleBtn = document.getElementById('sidebar-toggle');
+            const sidebar   = document.getElementById('peserta-sidebar');
+            const overlay   = document.getElementById('sidebar-overlay');
+            let isOpen = false;
+
+            function openSidebar() {
+                sidebar.style.transform = 'translateX(0)';
+                if (overlay) { overlay.style.display = 'block'; }
+                isOpen = true;
+            }
+
+            function closeSidebar() {
+                sidebar.style.transform = 'translateX(-100%)';
+                if (overlay) { overlay.style.display = 'none'; }
+                isOpen = false;
+            }
+
+            // On desktop (>=1024px): sidebar always visible, no overlay
+            function handleResize() {
+                if (window.innerWidth >= 1024) {
+                    sidebar.style.transform = 'translateX(0)';
+                    if (overlay) { overlay.style.display = 'none'; }
+                    isOpen = true;
+                } else {
+                    if (isOpen) return; // keep open if user opened it
+                    closeSidebar();
+                }
+            }
+
+            // Initialize based on current viewport
+            handleResize();
+            window.addEventListener('resize', handleResize);
+
+            // Hamburger button
+            if (toggleBtn) {
+                toggleBtn.addEventListener('click', function () {
+                    isOpen ? closeSidebar() : openSidebar();
+                });
+            }
+
+            // Overlay click to close
+            if (overlay) {
+                overlay.addEventListener('click', closeSidebar);
+            }
+
+            // Close sidebar when nav link is clicked on mobile
+            if (sidebar) {
+                sidebar.querySelectorAll('a').forEach(function (link) {
+                    link.addEventListener('click', function () {
+                        if (window.innerWidth < 1024) closeSidebar();
+                    });
+                });
+            }
+
+            // Expose closeSidebar globally for overlay onclick fallback
+            window.closeSidebar = closeSidebar;
+        });
+    </script>
 </body>
 
 </html>

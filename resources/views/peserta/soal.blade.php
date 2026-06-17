@@ -2,7 +2,7 @@
     <x-slot name="header">{{ $title ?? 'Ujian' }}</x-slot>
 
     <div class="py-10 px-4 sm:px-6 lg:px-8">
-        <div class="flex flex-col lg:flex-row gap-10">
+        <div class="flex flex-col lg:flex-row gap-6 lg:gap-10">
             
             {{-- Main Content: Questions --}}
             <div class="flex-1">
@@ -24,7 +24,7 @@
                             </div>
 
                             {{-- Question Card --}}
-                            <div class="bg-white border border-gray-200 rounded-3xl p-8 lg:p-10 shadow-xl relative overflow-hidden group">
+                            <div class="bg-white border border-gray-200 rounded-2xl lg:rounded-3xl p-5 sm:p-8 lg:p-10 shadow-xl relative overflow-hidden group">
                                 <div class="absolute -top-24 -right-24 w-48 h-48 bg-indigo-600/10 rounded-full blur-3xl group-hover:bg-indigo-600/20 transition-all duration-700"></div>
                                 
                                 <p class="text-lg md:text-xl text-gray-800 leading-relaxed font-medium mb-10 relative z-10">
@@ -36,7 +36,7 @@
                                     @php $options = ['a' => $q->opsi_a, 'b' => $q->opsi_b, 'c' => $q->opsi_c, 'd' => $q->opsi_d]; @endphp
                                     @foreach ($options as $key => $opt)
                                         @if ($opt !== null && $opt !== '')
-                                            <label class="relative flex items-center p-5 rounded-2xl border-2 border-gray-200 bg-white hover:bg-gray-50 hover:border-indigo-400 cursor-pointer transition-all duration-300 group/opt">
+                                            <label class="relative flex items-center p-3.5 sm:p-5 rounded-xl sm:rounded-2xl border-2 border-gray-200 bg-white hover:bg-gray-50 hover:border-indigo-400 cursor-pointer transition-all duration-300 group/opt">
                                                 <input type="radio" name="answers[{{ $q->id }}]" value="{{ $key }}" 
                                                     class="peer hidden" onchange="markAnswered({{ $index }})">
                                                 
@@ -91,20 +91,21 @@
             </div>
 
             {{-- Sidebar Info (Right) --}}
-            <div class="w-full lg:w-80 space-y-8">
+            <div class="w-full lg:w-80 space-y-4 lg:space-y-8 order-first lg:order-last">
                 
                 {{-- Timer Card --}}
-                <div class="bg-white border border-gray-200 rounded-3xl p-8 shadow-xl relative overflow-hidden">
+                {{-- Timer Card: compact on mobile, full on desktop --}}
+                <div class="bg-white border border-gray-200 rounded-2xl lg:rounded-3xl p-4 sm:p-8 shadow-xl relative overflow-hidden">
                     <div class="absolute -bottom-10 -left-10 w-24 h-24 bg-indigo-500/10 rounded-full blur-2xl"></div>
-                    
-                    <h4 class="text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] mb-6">Sisa Waktu Ujian</h4>
-                    
-                    <div class="flex items-center gap-5 mb-6">
-                        <div class="w-14 h-14 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center">
-                            <svg class="w-8 h-8 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+
+                    <h4 class="text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] mb-3 lg:mb-6">Sisa Waktu Ujian</h4>
+
+                    <div class="flex items-center gap-4 mb-3 lg:mb-6">
+                        <div class="w-10 h-10 lg:w-14 lg:h-14 rounded-xl lg:rounded-2xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center flex-shrink-0">
+                            <svg class="w-6 h-6 lg:w-8 lg:h-8 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                         </div>
-                        <div>
-                            <div class="text-4xl font-mono font-black text-gray-800 leading-none tracking-tight" id="timer">
+                        <div class="flex-1">
+                            <div class="text-3xl lg:text-4xl font-mono font-black text-gray-800 leading-none tracking-tight" id="timer">
                                 45:00
                             </div>
                             <p class="text-[10px] text-gray-500 mt-1 uppercase font-bold tracking-widest">Menit : Detik</p>
@@ -117,7 +118,7 @@
                 </div>
 
                 {{-- Navigation Grid --}}
-                <div class="bg-white border border-gray-200 rounded-3xl p-8 shadow-xl">
+                <div class="bg-white border border-gray-200 rounded-2xl lg:rounded-3xl p-4 sm:p-8 shadow-xl">
                     <h4 class="text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] mb-6">Navigasi Soal</h4>
                     <div class="grid grid-cols-4 gap-3">
                         @foreach ($questions as $index => $q)

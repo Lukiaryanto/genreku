@@ -1,7 +1,17 @@
 @props(['active' => ''])
 
-<aside class="w-64 fixed top-16 left-0 bg-blue-800 border-r border-blue-900/50 flex flex-col"
-    style="height: calc(100vh - 4rem);">
+{{-- Mobile Overlay --}}
+<div id="sidebar-overlay"
+    class="fixed inset-0 z-30 bg-black/50 backdrop-blur-sm lg:hidden transition-opacity duration-300"
+    style="display:none;"
+    onclick="closeSidebar()">
+</div>
+
+<aside id="peserta-sidebar"
+    class="fixed top-16 left-0 z-40 w-64 bg-blue-800 border-r border-blue-900/50 flex flex-col
+           transition-transform duration-300 ease-in-out"
+    style="height: calc(100vh - 4rem); transform: translateX(-100%);">
+
 
     {{-- Brand Header --}}
     <div class="px-5 py-5 border-b border-blue-700/50">
